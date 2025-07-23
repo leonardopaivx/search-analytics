@@ -8,6 +8,6 @@ class CreateSearchEvents < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
-    add_index :search_events, [:visitor_session_id, :typed_at]
+    add_index :search_events, [ :visitor_session_id, :typed_at ]
   end
 end
