@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "searches#index"
+  root 'searches#index'
 
   resources :articles, only: :show
   resource :search, only: [ :show ], controller: :searches

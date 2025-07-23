@@ -1,9 +1,9 @@
 module Analytics
   class TermsReport
     PERIODS = {
-      "24h" => 24.hours,
-      "7d"  => 7.days,
-      "30d" => 30.days
+      '24h' => 24.hours,
+      '7d'  => 7.days,
+      '30d' => 30.days
     }.freeze
 
     Result = Data.define(:from, :top_terms, :top_visitors, :terms_by_visitor)
@@ -40,34 +40,34 @@ module Analytics
 
     def query_top_terms(from)
       SearchTerm
-        .where("created_at >= ?", from)
+        .where('created_at >= ?', from)
         .group(:term)
-        .select("term, SUM(occurences) AS total")
-        .order("total DESC")
+        .select('term, SUM(occurences) AS total')
+        .order('total DESC')
         .limit(@limits[:terms])
     end
 
     def query_top_visitors(from)
       VisitorSession
         .joins(:search_terms)
-        .where("search_terms.created_at >= ?", from)
+        .where('search_terms.created_at >= ?', from)
         .select("visitor_sessions.display_name AS name,
                  SUM(search_terms.occurences) AS total_terms,
                  COUNT(DISTINCT search_terms.term) AS distinct_terms")
-        .group("visitor_sessions.id")
-        .order("total_terms DESC")
+        .group('visitor_sessions.id')
+        .order('total_terms DESC')
         .limit(@limits[:visitors])
     end
 
     def query_terms_by_visitor(from)
       SearchTerm
         .joins(:visitor_session)
-        .where("search_terms.created_at >= ?", from)
+        .where('search_terms.created_at >= ?', from)
         .select("visitor_sessions.display_name AS name,
                  search_terms.term AS term,
                  SUM(search_terms.occurences) AS total")
-        .group("visitor_sessions.display_name", "search_terms.term")
-        .order("total DESC")
+        .group('visitor_sessions.display_name', 'search_terms.term')
+        .order('total DESC')
         .limit(@limits[:terms_by_visitor])
     end
   end
