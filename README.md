@@ -1,2 +1,24 @@
-# search-analytics
-A realtime article search and analytics platform built with Rails 8 and Vanilla JS via Importmap. User keystrokes are logged and intelligently compressed to avoid the “pyramid problem”, providing accurate search metrics and dashboards for top queries and trends.
+# README
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
