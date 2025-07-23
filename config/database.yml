@@ -16,11 +16,21 @@ test:
   database: search_analytics_test
 
 production:
-  <<: *default
-  database: <%= ENV["POSTGRES_DB"] %>
-  username: <%= ENV["POSTGRES_USER"] %>
-  password: <%= ENV["POSTGRES_PASSWORD"] %>
-  host: <%= ENV["DB_HOST"] %>
+  primary:
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
+
+  cable:
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
+
+  queue:
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
+
+  cache:
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
 
 cable:
   <<: *default
