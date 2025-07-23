@@ -1,0 +1,9 @@
+<form class="flex gap-2 items-center">
+  <label for="period" class="text-sm text-slate-600">Period</label>
+  <select id="period" name="period" class="rounded-md border-slate-300 text-sm"
+          onchange="this.form.submit()">
+    <option value="24h" <%= 'selected' if params[:period] == '24h' %>>Last 24h</option>
+    <option value="7d"  <%= 'selected' if params[:period].blank? || params[:period] == '7d' %>>Last 7 days</option>
+    <option value="30d" <%= 'selected' if params[:period] == '30d' %>>Last 30 days</option>
+  </select>
+</form>

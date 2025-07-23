@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_23_013556) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_23_154622) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -50,6 +50,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_23_013556) do
     t.string "session_token", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "display_name"
+    t.index ["display_name"], name: "index_visitor_sessions_on_display_name", unique: true
     t.index ["session_token"], name: "index_visitor_sessions_on_session_token", unique: true
   end
 

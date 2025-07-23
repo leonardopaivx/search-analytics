@@ -1,69 +1,17 @@
-<div class="mx-auto max-w-8xl px-6 py-12">
-  <h1 class="text-3xl font-bold tracking-tight mb-8">Top Search Terms</h1>
-
-  <form class="mb-6 flex gap-3 items-center">
-    <label for="period" class="text-sm text-slate-600">Period</label>
-    <select id="period" name="period" class="rounded-md border-slate-300 text-sm"
-            onchange="this.form.submit()">
-      <option value="24h"  <%= 'selected' if params[:period] == '24h'  %>>Last 24h</option>
-      <option value="7d"   <%= 'selected' if params[:period].blank? || params[:period] == '7d' %>>Last 7 days</option>
-      <option value="30d"  <%= 'selected' if params[:period] == '30d' %>>Last 30 days</option>
-    </select>
-  </form>
-
-  <div class="overflow-hidden rounded-xl border border-slate-200 shadow-sm bg-white">
-    <table class="min-w-full text-sm">
-      <thead class="bg-slate-50 text-slate-500 uppercase text-xs tracking-wider">
-      <tr>
-        <th class="py-3 pl-6 text-left">#</th>
-        <th class="py-3 text-left">Term</th>
-        <th class="py-3 pr-6 text-right">Total</th>
-      </tr>
-      </thead>
-      <tbody class="divide-y divide-slate-100">
-      <% @top_terms.each_with_index do |row, idx| %>
-        <tr class="hover:bg-slate-50">
-          <td class="py-3 pl-6 text-slate-400"><%= idx + 1 %></td>
-          <td class="py-3 font-medium text-slate-800"><%= row.term %></td>
-          <td class="py-3 pr-6 text-right font-semibold"><%= row.total %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
+<div class="mx-auto max-w-[1400px] px-8 py-12">
+  <div class="flex items-center justify-between mb-8">
+    <%= render "shared/back_home_button" %>
+    <h1 class="text-3xl font-bold tracking-tight">Analytics Dashboard</h1>
+    <%= render "period_filter" %>
   </div>
 
-  <div>
-    <canvas id="termsChart" height="180"></canvas>
-  </div>
+  <section class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+    <%= render "top_terms_table", top_terms: @top_terms, col_span: "md:col-span-7" %>
+    <%= render "terms_chart_card", json_url: analytics_terms_path(format: :json, period: params[:period]), col_span: "md:col-span-5" %>
+  </section>
+
+  <section class="grid grid-cols-1 md:grid-cols-12 gap-8">
+    <%= render "top_visitors_table", top_visitors: @top_visitors, col_span: "md:col-span-6" %>
+    <%= render "terms_by_visitor_table", rows: @terms_by_visitor, col_span: "md:col-span-6" %>
+  </section>
 </div>
-
-<script type="module">
-    import { Chart, registerables } from "chart.js";
-    Chart.register(...registerables);
-
-    fetch("<%= analytics_terms_path(format: :json, period: params[:period]) %>")
-        .then(r => r.json())
-        .then(data => {
-            const ctx = document.getElementById('termsChart');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: data.map(d => d.term),
-                    datasets: [{
-                        label: 'Total',
-                        data: data.map(d => d.total)
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { display: false },
-                    },
-                    scales: {
-                        x: { ticks: { font: { size: 12 } } },
-                        y: { beginAtZero: true }
-                    }
-                }
-            });
-        });
-</script>
