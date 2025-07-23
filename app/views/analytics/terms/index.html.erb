@@ -1,0 +1,17 @@
+<div class="mx-auto max-w-[1400px] px-8 py-12">
+  <div class="flex items-center justify-between mb-8">
+    <%= render "shared/back_home_button" %>
+    <h1 class="text-3xl font-bold tracking-tight">Analytics Dashboard</h1>
+    <%= render "period_filter" %>
+  </div>
+
+  <section class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+    <%= render "top_terms_table", top_terms: @top_terms, col_span: "md:col-span-7" %>
+    <%= render "terms_chart_card", json_url: analytics_terms_path(format: :json, period: params[:period]), col_span: "md:col-span-5" %>
+  </section>
+
+  <section class="grid grid-cols-1 md:grid-cols-12 gap-8">
+    <%= render "top_visitors_table", top_visitors: @top_visitors, col_span: "md:col-span-6" %>
+    <%= render "terms_by_visitor_table", rows: @terms_by_visitor, col_span: "md:col-span-6" %>
+  </section>
+</div>

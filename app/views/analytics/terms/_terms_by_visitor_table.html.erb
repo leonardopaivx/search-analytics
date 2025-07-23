@@ -1,0 +1,26 @@
+<div class="<%= col_span %> col-span-12 overflow-hidden rounded-xl border border-slate-200 shadow-sm bg-white">
+  <h2 class="text-lg font-semibold px-6 pt-6 pb-2 text-slate-700">Most Searched Terms by Visitors</h2>
+
+  <div class="overflow-x-auto">
+    <div class="h-80 overflow-y-auto">
+      <table class="min-w-full text-sm">
+        <thead class="bg-slate-50 text-slate-500 uppercase text-xs tracking-wider sticky top-0">
+        <tr>
+          <th class="py-3 pl-6 text-left">Visitor</th>
+          <th class="py-3 text-left">Term</th>
+          <th class="py-3 pr-6 text-right">Total</th>
+        </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+        <% rows.each do |r| %>
+          <tr class="hover:bg-slate-50">
+            <td class="py-3 pl-6 font-medium text-slate-800"><%= r.name %></td>
+            <td class="py-3 text-slate-700"><%= r.term %></td>
+            <td class="py-3 pr-6 text-right font-semibold"><%= r.total %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

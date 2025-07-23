@@ -1,0 +1,30 @@
+<div class="<%= col_span %> col-span-12 overflow-hidden rounded-xl border border-slate-200 shadow-sm bg-white p-6 min-w-0">
+  <h2 class="text-lg font-semibold mb-4 text-slate-700">Top Terms (Chart)</h2>
+  <div class="relative h-64">
+    <canvas id="termsChart" class="w-full h-full"></canvas>
+  </div>
+</div>
+
+<script type="module">
+    import { Chart, registerables } from "chart.js";
+    Chart.register(...registerables);
+
+    fetch("<%= json_url %>")
+        .then(r => r.json())
+        .then(({ terms }) => {
+            const ctx = document.getElementById('termsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: terms.map(d => d.term),
+                    datasets: [{ label: 'Total', data: terms.map(d => d.total) }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+        });
+</script>
