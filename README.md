@@ -166,6 +166,7 @@ Payload example for `/search_events`:
 
 ## Roadmap / Ideas
 
+- Implement a proper relevance ranking algorithm for document search (e.g., TF-IDF, Okapi BM25, cosine similarity over TF-IDF vectors, embedding-based retrieval with ANN indexes such as FAISS/pgvector/Elasticsearch).
 - Pagination / filters in dashboard (by visitor, by term).
 - Export analytics as CSV.
 - Add authentication for the dashboard.
