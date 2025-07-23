@@ -69,4 +69,6 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+  config.infer_spec_type_from_file_location!
 end
