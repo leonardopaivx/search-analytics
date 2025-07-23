@@ -7,7 +7,12 @@ function renderResults(items) {
     resultsEl.innerHTML = "";
     items.forEach((item) => {
         const li = document.createElement("li");
-        li.textContent = item.title;
+        li.innerHTML = `
+      <a href="/articles/${item.id}"
+         class="block p-3 rounded-md border border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition">
+        <h3 class="font-medium text-slate-800">${item.title}</h3>
+      </a>
+    `;
         resultsEl.appendChild(li);
     });
 }
