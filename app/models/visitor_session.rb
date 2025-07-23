@@ -10,7 +10,7 @@ class VisitorSession < ApplicationRecord
 
   validates :session_token, :ip_address, presence: true
 
-  before_validation :assign_display_name
+  before_validation :assign_display_name, on: :create
 
   private
 
