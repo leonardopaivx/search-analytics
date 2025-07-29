@@ -4,7 +4,7 @@ ruby '3.4.5'
 
 # Core
 gem 'rails', '~> 8.0.2'
-gem 'pg',    '~> 1.5'
+gem 'pg',    '~> 1.6'
 gem 'puma',  '>= 6.0'
 
 # Assets / JS / CSS
