@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '3.4.5'
 
 # Core
-gem 'rails', '~> 8.0.2'
+gem 'rails', '~> 8.0.3'
 gem 'pg',    '~> 1.5'
 gem 'puma',  '>= 6.0'
 
